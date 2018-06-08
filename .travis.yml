@@ -4,7 +4,6 @@ cache: pip
 
 python:
  - "2.7"
- - "3.2"
  - "3.3"
  - "3.4"
  - "3.5"
@@ -21,12 +20,11 @@ env:
    - DJANGO="Django<2.2"
 
 install:
- # pip >=8 dropped Python 3.2 support
- - pip install "pip<8.0.0" wheel
- - pip install "$DJANGO" "coverage==3.7.1" coveralls "mock>=1.0.1"
- - pip install .
- - pip install flake8
+ - pip install --upgrade pip wheel setuptools
+ - pip install coverage flake8
+ - pip install "$DJANGO"
  - pip install -r requirements.txt
+ - pip install .
 
 matrix:
   fast_finish: true
@@ -34,31 +32,25 @@ matrix:
   exclude:
     # Supported Django/Python versions - https://docs.djangoproject.com/en/1.11/faq/install/#what-python-version-can-i-use-with-django
     # Latest Django 1.8
-    - { python: "3.2", env: DJANGO="Django<1.9" }
     - { python: "3.6", env: DJANGO="Django<1.9" }
     - { python: "3.7-dev", env: DJANGO="Django<1.9" }
     # Latest Django 1.9
-    - { python: "3.2", env: DJANGO="Django<1.10" }
     - { python: "3.3", env: DJANGO="Django<1.10" }
     - { python: "3.6", env: DJANGO="Django<1.10" }
     - { python: "3.7-dev", env: DJANGO="Django<1.10" }
     # Latest Django 1.10
-    - { python: "3.2", env: DJANGO="Django<1.11" }
     - { python: "3.3", env: DJANGO="Django<1.11" }
     - { python: "3.6", env: DJANGO="Django<1.11" }
     - { python: "3.7-dev", env: DJANGO="Django<1.11" }
     # Latest Django 1.11
-    - { python: "3.2", env: DJANGO="Django<1.12" }
     - { python: "3.3", env: DJANGO="Django<1.12" }
     - { python: "3.7-dev", env: DJANGO="Django<1.12" }
     # Latest Django 2.0
     - { python: "2.7", env: DJANGO="Django<2.1" }
-    - { python: "3.2", env: DJANGO="Django<2.1" }
     - { python: "3.3", env: DJANGO="Django<2.1" }
     - { python: "3.7-dev", env: DJANGO="Django<2.1" }
     # Latest Django 2.1
     - { python: "2.7", env: DJANGO="Django<2.2" }
-    - { python: "3.2", env: DJANGO="Django<2.2" }
     - { python: "3.3", env: DJANGO="Django<2.2" }
     - { python: "3.4", env: DJANGO="Django<2.2" }
 
